@@ -74,15 +74,6 @@
   </url>
   
   <url>
-    <loc>https://pizz33.github.io/posts/2be82636b79b/</loc>
-    
-    <lastmod>2023-08-03</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://pizz33.github.io/posts/5a4172515764/</loc>
     
     <lastmod>2023-08-02</lastmod>
@@ -488,28 +479,7 @@
 
   
   <url>
-    <loc>https://pizz33.github.io/tags/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/</loc>
-    <lastmod>2023-09-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://pizz33.github.io/tags/Java%E5%AD%A6%E4%B9%A0/</loc>
-    <lastmod>2023-09-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://pizz33.github.io/tags/%E5%85%8D%E6%9D%80%E6%8A%80%E6%9C%AF/</loc>
-    <lastmod>2023-09-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://pizz33.github.io/tags/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/</loc>
     <lastmod>2023-09-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -523,7 +493,21 @@
   </url>
   
   <url>
+    <loc>https://pizz33.github.io/tags/%E5%85%8D%E6%9D%80%E6%8A%80%E6%9C%AF/</loc>
+    <lastmod>2023-09-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://pizz33.github.io/tags/%E5%B7%A5%E5%85%B7%E5%BC%80%E5%8F%91/</loc>
+    <lastmod>2023-09-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://pizz33.github.io/tags/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/</loc>
     <lastmod>2023-09-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -538,6 +522,13 @@
   
   <url>
     <loc>https://pizz33.github.io/tags/%E6%94%BB%E9%98%B2%E6%BC%94%E7%BB%83/</loc>
+    <lastmod>2023-09-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://pizz33.github.io/tags/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/</loc>
     <lastmod>2023-09-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -565,13 +556,6 @@
   </url>
   
   <url>
-    <loc>https://pizz33.github.io/tags/%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/</loc>
-    <lastmod>2023-09-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://pizz33.github.io/tags/%E6%BA%AF%E6%BA%90%E5%8F%8D%E5%88%B6/</loc>
     <lastmod>2023-09-07</lastmod>
     <changefreq>weekly</changefreq>
@@ -579,7 +563,14 @@
   </url>
   
   <url>
-    <loc>https://pizz33.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%AE%89%E5%85%A8/</loc>
+    <loc>https://pizz33.github.io/tags/%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/</loc>
+    <lastmod>2023-09-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://pizz33.github.io/tags/%E7%97%95%E8%BF%B9%E6%B8%85%E9%99%A4/</loc>
     <lastmod>2023-09-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -593,7 +584,7 @@
   </url>
   
   <url>
-    <loc>https://pizz33.github.io/tags/%E8%BD%AF%E4%BB%B6%E7%A0%B4%E8%A7%A3/</loc>
+    <loc>https://pizz33.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%AE%89%E5%85%A8/</loc>
     <lastmod>2023-09-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -607,7 +598,7 @@
   </url>
   
   <url>
-    <loc>https://pizz33.github.io/tags/%E7%97%95%E8%BF%B9%E6%B8%85%E9%99%A4/</loc>
+    <loc>https://pizz33.github.io/tags/%E8%BD%AF%E4%BB%B6%E7%A0%B4%E8%A7%A3/</loc>
     <lastmod>2023-09-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
