@@ -515,13 +515,6 @@
 
   
   <url>
-    <loc>https://pizz33.github.io/tags/Java%E5%AD%A6%E4%B9%A0/</loc>
-    <lastmod>2023-11-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://pizz33.github.io/tags/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/</loc>
     <lastmod>2023-11-15</lastmod>
     <changefreq>weekly</changefreq>
@@ -529,14 +522,21 @@
   </url>
   
   <url>
-    <loc>https://pizz33.github.io/tags/%E5%85%8D%E6%9D%80%E6%8A%80%E6%9C%AF/</loc>
+    <loc>https://pizz33.github.io/tags/%E4%BA%91%E5%AE%89%E5%85%A8/</loc>
     <lastmod>2023-11-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://pizz33.github.io/tags/%E4%BA%91%E5%AE%89%E5%85%A8/</loc>
+    <loc>https://pizz33.github.io/tags/Java%E5%AD%A6%E4%B9%A0/</loc>
+    <lastmod>2023-11-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://pizz33.github.io/tags/%E5%85%8D%E6%9D%80%E6%8A%80%E6%9C%AF/</loc>
     <lastmod>2023-11-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -557,14 +557,14 @@
   </url>
   
   <url>
-    <loc>https://pizz33.github.io/tags/%E6%94%BB%E9%98%B2%E6%BC%94%E7%BB%83/</loc>
+    <loc>https://pizz33.github.io/tags/%E6%8A%80%E6%9C%AF%E7%A0%94%E7%A9%B6/</loc>
     <lastmod>2023-11-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://pizz33.github.io/tags/%E6%8A%80%E6%9C%AF%E7%A0%94%E7%A9%B6/</loc>
+    <loc>https://pizz33.github.io/tags/%E6%94%BB%E9%98%B2%E6%BC%94%E7%BB%83/</loc>
     <lastmod>2023-11-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -606,7 +606,7 @@
   </url>
   
   <url>
-    <loc>https://pizz33.github.io/tags/%E7%BA%A2%E9%98%9F%E6%8A%80%E6%9C%AF/</loc>
+    <loc>https://pizz33.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%AE%89%E5%85%A8/</loc>
     <lastmod>2023-11-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -620,7 +620,7 @@
   </url>
   
   <url>
-    <loc>https://pizz33.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%AE%89%E5%85%A8/</loc>
+    <loc>https://pizz33.github.io/tags/%E7%BA%A2%E9%98%9F%E6%8A%80%E6%9C%AF/</loc>
     <lastmod>2023-11-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
