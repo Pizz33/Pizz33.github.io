@@ -777,3 +777,9 @@ document.addEventListener('DOMContentLoaded', function () {
   refreshFn()
   unRefreshFn()
 })
+// 强制默认进入夜间模式
+window.addEventListener('DOMContentLoaded', () => {
+  const html = document.documentElement;
+  html.setAttribute('data-theme', 'dark');
+  localStorage.setItem('theme', 'dark');
+});
